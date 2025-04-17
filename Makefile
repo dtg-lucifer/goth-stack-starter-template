@@ -3,4 +3,8 @@ run: build
 
 build:
 	@templ generate && \
-		go build -o ./bin/main ./cmd/app/main.go
+		go build -o ./bin/main .
+
+dev:
+	@templ generate && \
+		air

@@ -21,6 +21,7 @@ func main() {
 	listenAddr := os.Getenv("LISTEN_ADDR")
 	router := chi.NewMux()
 
+	router.Handle("/*", public())
 	router.Get("/", middlewares.HandleError(handlers.Index))
 
 	if err := http.ListenAndServe(listenAddr, router); err != nil {
