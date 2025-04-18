@@ -18,8 +18,13 @@ func main() {
 		slog.Info("Loading system env variables")
 	}
 
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+
 	listenAddr := os.Getenv("LISTEN_ADDR")
 	router := chi.NewMux()
+
+	router.Use(middlewares.Recover)
+	router.Use(middlewares.Logger(logger))
 
 	router.Handle("/*", public())
 	router.Get("/", middlewares.HandleError(handlers.Index))
