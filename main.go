@@ -24,6 +24,11 @@ func main() {
 	router.Handle("/*", public())
 	router.Get("/", middlewares.HandleError(handlers.Index))
 
+	// Counter API endpoints
+	router.Post("/api/counter/increment", middlewares.HandleError(handlers.CounterIncrement))
+	router.Post("/api/counter/decrement", middlewares.HandleError(handlers.CounterDecrement))
+	router.Post("/api/counter/reset", middlewares.HandleError(handlers.CounterReset))
+
 	if err := http.ListenAndServe(listenAddr, router); err != nil {
 		slog.Error("Error starting server", "ListenAddr", listenAddr)
 	}

@@ -24,7 +24,7 @@ dev:
 	@air
 
 tailwind-watch:
-	@./bin/tailwindcss -i ./views/layout/root.css -o ./public/styles.css --watch
+	@./bin/tailwindcss -i ./views/layout/root.css -o ./public/styles.css --watch --minify
 
 templ-watch:
 	@templ generate --watch --proxy=http://localhost:9999

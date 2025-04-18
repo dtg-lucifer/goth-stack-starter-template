@@ -1,6 +1,10 @@
 package layout
 
-templ RootLayout() {
+import "github.com/dtg-lucifer/goth-stack-starter/components/navbar"
+
+var count int
+
+templ RootLayout(c int) {
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -10,7 +14,8 @@ templ RootLayout() {
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <title>GOTH Stack Starter</title>
   </head>
-  <body>
+  <body class="light:bg-white dark:bg-gray-900 dark:text-white">
+    @navbar.Navbar()
     { children... }
   </body>
   </html>

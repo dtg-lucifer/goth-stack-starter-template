@@ -8,7 +8,15 @@ package home
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/dtg-lucifer/goth-stack-starter/views/layout"
+import (
+	"github.com/dtg-lucifer/goth-stack-starter/components/counter"
+	"github.com/dtg-lucifer/goth-stack-starter/state"
+	"github.com/dtg-lucifer/goth-stack-starter/views/layout"
+)
+
+func getInitialCount() int {
+	return state.GlobalStore.GetInt("counter", 0)
+}
 
 func Home() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -43,13 +51,21 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"text-blue-500 font-bold text-2xl\">Hello 3</div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main class=\"min-h-screen w-full flex flex-col items-center justify-center\"><div class=\"flex flex-col items-center justify-center h-[30rem] py-2\"><img src=\"/go.png\" class=\"w-32 h-32 mb-4\" alt=\"Go Logo\"><h1 class=\"text-4xl font-bold text-blue-500\">Welcome to GOTH Starter Template</h1><p class=\"mt-4 text-lg\">This is a simple home page template.</p><p class=\"mt-4 text-lg\">You can start building your application from here.</p>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = counter.Counter(getInitialCount()).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layout.RootLayout().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.RootLayout(getInitialCount()).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
