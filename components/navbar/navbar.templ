@@ -1,12 +1,27 @@
 package navbar
 
+import "github.com/dtg-lucifer/goth-stack-starter/components/ui/button"
+
 templ Navbar() {
-  <nav class="dark:bg-gray-800 bg-gray-200 backdrop-blur-sm p-4 w-[60%] mx-auto rounded-2xl shadow-md flex justify-between items-center sticky top-5 z-10">
-    <div class="flex items-center">
-      <a href="/" class="dark:text-white light:text-black text-2xl font-bold">GOTH Stack Starter</a>
-    </div>
-    <ul class="flex space-x-4">
-      <li class="flex items-center justify-center gap-2 cursor-pointer"><a href="https://github.com/dtg-lucifer/goth-stack-starter-template" target="_blank" class="dark:text-white light:text-black">Github</a><img class="w-6 h-6" src="/github.png"></li>
-    </ul>
-  </nav>
+	<nav class="dark:bg-gray-800 bg-gray-200 backdrop-blur-sm p-4 w-[60%] mx-auto rounded-2xl shadow-md flex justify-between items-center sticky top-5 z-10">
+		<div class="flex items-center">
+			<a href="/" class="dark:text-white light:text-black text-2xl font-bold">GOTH Stack Starter</a>
+		</div>
+		<ul class="flex space-x-4">
+			<a href="https://github.com/dtg-lucifer/goth-stack-starter-template" target="_blank" class="dark:text-white light:text-black">
+				@button.Button(button.ButtonProps{
+					Variant:   button.Link,
+					Size:      button.DefaultSize,
+					HxPost:    "#",
+					HxTarget:  "#",
+					HxSwap:    "innerHTML",
+					ClassName: "",
+					Disabled:  false,
+				}) {
+					<span class="text-lg">Github</span>
+					<img class="w-6 h-6" src="/github.png"/>
+				}
+			</a>
+		</ul>
+	</nav>
 }

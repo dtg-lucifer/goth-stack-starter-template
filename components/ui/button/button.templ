@@ -10,6 +10,16 @@ type ButtonVariant string
 // ButtonSize defines button size variants
 type ButtonSize string
 
+type ButtonProps struct {
+	Variant   ButtonVariant
+	Size      ButtonSize
+	ClassName string
+	Disabled  bool
+	HxPost    string
+	HxTarget  string
+	HxSwap    string
+}
+
 // Available button variants
 const (
 	Default     ButtonVariant = "default"
@@ -66,8 +76,14 @@ func buttonClasses(variant ButtonVariant, size ButtonSize, additionalClasses ...
 	return strings.Join(classes, " ")
 }
 
-templ Button(variant ButtonVariant, size ButtonSize, className string, disabled bool, hxPost string, hxTarget string, hxSwap string) {
-	<button class={ buttonClasses(variant, size, className) } disabled?={ disabled } hx-post={ hxPost } hx-target={ hxTarget } hx-swap={ hxSwap }>
+templ Button(props ButtonProps) {
+	<button 
+		class={ buttonClasses(props.Variant, props.Size, props.ClassName) } 
+		disabled?={ props.Disabled } 
+		hx-post={ props.HxPost } 
+		hx-target={ props.HxTarget } 
+		hx-swap={ props.HxSwap }
+	>
 		{ children... }
 	</button>
 }

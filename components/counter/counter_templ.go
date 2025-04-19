@@ -67,7 +67,15 @@ func Counter(count int) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = button.Button(button.Default, button.DefaultSize, "", false, "/api/counter/increment", "#counter", "outerHTML").Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = button.Button(button.ButtonProps{
+			Variant:   button.Default,
+			Size:      button.DefaultSize,
+			HxPost:    "/api/counter/increment",
+			HxTarget:  "#counter",
+			HxSwap:    "outerHTML",
+			ClassName: "",
+			Disabled:  false,
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -89,7 +97,15 @@ func Counter(count int) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = button.Button(button.Destructive, button.DefaultSize, "", false, "/api/counter/decrement", "#counter", "outerHTML").Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = button.Button(button.ButtonProps{
+			Variant:   button.Destructive,
+			Size:      button.DefaultSize,
+			HxPost:    "/api/counter/decrement",
+			HxTarget:  "#counter",
+			HxSwap:    "outerHTML",
+			ClassName: "",
+			Disabled:  false,
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -111,7 +127,15 @@ func Counter(count int) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = button.Button(button.Secondary, button.DefaultSize, "", false, "/api/counter/reset", "#counter", "outerHTML").Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = button.Button(button.ButtonProps{
+			Variant:   button.Outline,
+			Size:      button.DefaultSize,
+			HxPost:    "/api/counter/reset",
+			HxTarget:  "#counter",
+			HxSwap:    "outerHTML",
+			ClassName: "",
+			Disabled:  false,
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

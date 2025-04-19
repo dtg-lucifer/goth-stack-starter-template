@@ -18,6 +18,16 @@ type ButtonVariant string
 // ButtonSize defines button size variants
 type ButtonSize string
 
+type ButtonProps struct {
+	Variant   ButtonVariant
+	Size      ButtonSize
+	ClassName string
+	Disabled  bool
+	HxPost    string
+	HxTarget  string
+	HxSwap    string
+}
+
 // Available button variants
 const (
 	Default     ButtonVariant = "default"
@@ -74,7 +84,7 @@ func buttonClasses(variant ButtonVariant, size ButtonSize, additionalClasses ...
 	return strings.Join(classes, " ")
 }
 
-func Button(variant ButtonVariant, size ButtonSize, className string, disabled bool, hxPost string, hxTarget string, hxSwap string) templ.Component {
+func Button(props ButtonProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -95,7 +105,7 @@ func Button(variant ButtonVariant, size ButtonSize, className string, disabled b
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{buttonClasses(variant, size, className)}
+		var templ_7745c5c3_Var2 = []any{buttonClasses(props.Variant, props.Size, props.ClassName)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -117,7 +127,7 @@ func Button(variant ButtonVariant, size ButtonSize, className string, disabled b
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if disabled {
+		if props.Disabled {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " disabled")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -128,9 +138,9 @@ func Button(variant ButtonVariant, size ButtonSize, className string, disabled b
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(hxPost)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(props.HxPost)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 70, Col: 98}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 83, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -141,9 +151,9 @@ func Button(variant ButtonVariant, size ButtonSize, className string, disabled b
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(hxTarget)
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(props.HxTarget)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 70, Col: 121}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 84, Col: 28}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -154,9 +164,9 @@ func Button(variant ButtonVariant, size ButtonSize, className string, disabled b
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var6 string
-		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(hxSwap)
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(props.HxSwap)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 70, Col: 140}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/ui/button/button.templ`, Line: 85, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

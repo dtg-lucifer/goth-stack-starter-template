@@ -8,6 +8,8 @@ package navbar
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "github.com/dtg-lucifer/goth-stack-starter/components/ui/button"
+
 func Navbar() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -29,7 +31,41 @@ func Navbar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<nav class=\"dark:bg-gray-800 bg-gray-200 backdrop-blur-sm p-4 w-[60%] mx-auto rounded-2xl shadow-md flex justify-between items-center sticky top-5 z-10\"><div class=\"flex items-center\"><a href=\"/\" class=\"dark:text-white light:text-black text-2xl font-bold\">GOTH Stack Starter</a></div><ul class=\"flex space-x-4\"><li class=\"flex items-center justify-center gap-2 cursor-pointer\"><a href=\"https://github.com/dtg-lucifer/goth-stack-starter-template\" target=\"_blank\" class=\"dark:text-white light:text-black\">Github</a><img class=\"w-6 h-6\" src=\"/github.png\"></li></ul></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<nav class=\"dark:bg-gray-800 bg-gray-200 backdrop-blur-sm p-4 w-[60%] mx-auto rounded-2xl shadow-md flex justify-between items-center sticky top-5 z-10\"><div class=\"flex items-center\"><a href=\"/\" class=\"dark:text-white light:text-black text-2xl font-bold\">GOTH Stack Starter</a></div><ul class=\"flex space-x-4\"><a href=\"https://github.com/dtg-lucifer/goth-stack-starter-template\" target=\"_blank\" class=\"dark:text-white light:text-black\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"text-lg\">Github</span> <img class=\"w-6 h-6\" src=\"/github.png\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = button.Button(button.ButtonProps{
+			Variant:   button.Link,
+			Size:      button.DefaultSize,
+			HxPost:    "#",
+			HxTarget:  "#",
+			HxSwap:    "innerHTML",
+			ClassName: "",
+			Disabled:  false,
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</a></ul></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

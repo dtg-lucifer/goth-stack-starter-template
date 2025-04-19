@@ -7,13 +7,37 @@ templ Counter(count int) {
     <div id="counter" class="flex flex-col items-center gap-2">
         <p class="mt-4 text-lg">Current count: {strconv.Itoa(count)}</p>
         <div class="flex gap-2">
-            @button.Button(button.Default, button.DefaultSize, "", false, "/api/counter/increment", "#counter", "outerHTML") {
+            @button.Button(button.ButtonProps{
+                Variant: button.Default,
+                Size:    button.DefaultSize,
+                HxPost:  "/api/counter/increment",
+                HxTarget: "#counter",
+                HxSwap:  "outerHTML",
+                ClassName: "",
+                Disabled: false,
+            }) {
                 <span class="text-lg">Increment</span>
             }
-            @button.Button(button.Destructive, button.DefaultSize, "", false, "/api/counter/decrement", "#counter", "outerHTML") {
+            @button.Button(button.ButtonProps{
+                Variant: button.Destructive,
+                Size:    button.DefaultSize,
+                HxPost:  "/api/counter/decrement",
+                HxTarget: "#counter",
+                HxSwap:  "outerHTML",
+                ClassName: "",
+                Disabled: false,
+            }) {
                 <span class="text-lg">Decrement</span>
             }
-            @button.Button(button.Secondary, button.DefaultSize, "", false, "/api/counter/reset", "#counter", "outerHTML") {
+            @button.Button(button.ButtonProps{
+                Variant: button.Outline,
+                Size:    button.DefaultSize,
+                HxPost:  "/api/counter/reset",
+                HxTarget: "#counter",
+                HxSwap:  "outerHTML",
+                ClassName: "",
+                Disabled: false,
+            }) {
                 <span class="text-lg">Reset</span>
             }
         </div>
