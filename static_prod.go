@@ -5,6 +5,7 @@ package main
 
 import (
 	"embed"
+	"io/fs"
 	"net/http"
 )
 
@@ -12,5 +13,9 @@ import (
 var publicFS embed.FS
 
 func public() http.Handler {
-	return http.FileServer(http.FS(publicFS))
+	fs, err := fs.Sub(publicFS, "public")
+	if err != nil {
+		panic(err)
+	}
+	return http.FileServer(http.FS(fs))
 }

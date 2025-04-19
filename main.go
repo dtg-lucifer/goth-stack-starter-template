@@ -13,6 +13,7 @@ func main() {
 		slog.Info("Loading system env variables")
 	}
 
+	// @INFO general logger writing to stdout
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		AddSource: true,
 		Level:     slog.LevelInfo,
@@ -22,6 +23,10 @@ func main() {
 	slog.Info("Starting goth-stack-starter")
 
 	listenAddr := os.Getenv("LISTEN_ADDR")
+	if listenAddr == "" {
+		slog.Error("LISTEN_ADDR environment variable is not set")
+		return
+	}
 
 	server := NewServer(listenAddr, logger)
 	server.Start()

@@ -1,20 +1,35 @@
-.PHONY: run build setup download-tailwind dev tailwind-watch templ-watch templ download-templ
+.PHONY: run build setup download-tailwind dev dev-all tailwind-watch templ-watch templ download-templ serve-static
 
 # @INFO production build and run
-run: build
-	@./bin/main
-
-build: tailwind templ
-	@go build -o ./bin/main .
+run: templ tailwind
+	@go build -tags prod -o ./bin/main . && \
+		./bin/main
 
 # @INFO development build and run
-dev:
+air:
 	@air
+
+dev: templ tailwind
+	@echo "Starting development server with all watchers..."
+	@$(MAKE) -j3 air templ-watch tailwind-watch
 # ----------------------------------------------------
 
 # @INFO setup the project
-setup: download-tailwind download-templ tailwind templ env
+setup: download-tailwind download-templ tailwind templ env log
 	@go mod tidy
+
+# ----------------------------------------------------
+clean:
+	@rm -rf ./bin && \
+		rm -rf ./tmp && \
+		rm -rf ./logs && \
+		echo "Cleaned up the project."
+
+# ----------------------------------------------------
+log:
+	@mkdir -p ./logs && \
+		touch ./logs/app.log && \
+		echo "Log file created."
 
 env:
 	@touch .env && \
@@ -30,7 +45,7 @@ download-tailwind:
 		echo "Tailwind CSS downloaded and made executable."
 
 download-templ:
-	@curl -sLO https://github.com/a-h/templ/releases/download/latest/templ_Linux_x86_64.tar.gz && \
+	@curl -sLO https://github.com/a-h/templ/releases/latest/download/templ_Linux_x86_64.tar.gz && \
 		mkdir -p tmp && mkdir -p bin && \
 		tar -xzf templ_Linux_x86_64.tar.gz -C ./tmp && \
 		mv ./tmp/templ ./bin/templ && \

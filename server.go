@@ -9,6 +9,7 @@ import (
 	"github.com/dtg-lucifer/goth-stack-starter/handlers"
 	"github.com/dtg-lucifer/goth-stack-starter/middlewares"
 	"github.com/dtg-lucifer/goth-stack-starter/state"
+	"github.com/dtg-lucifer/goth-stack-starter/utils"
 )
 
 type Server struct {
@@ -30,7 +31,14 @@ func NewServer(addr string, logger *slog.Logger) *Server {
 func (s *Server) setupMiddlewares() {
 	// @TODO setup cors
 	// s.Router.Use(CorsMiddleware())
+
+	fileLogger := utils.NewFileLogger()
+
+	s.Logger.Info("Attaching stdout logger")
 	s.Router.Use(middlewares.Logger(s.Logger))
+	s.Logger.Info("Attaching file logger")
+
+	s.Router.Use(middlewares.Logger(fileLogger))
 	s.Router.Use(middlewares.Recover)
 	s.Router.Use(middlewares.RequestID)
 }

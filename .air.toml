@@ -22,9 +22,7 @@ log = "build-errors.log"
 poll = false
 poll_interval = 0
 post_cmd = [ ]
-pre_cmd = [
-"./bin/templ generate && ./bin/tailwindcss -i ./views/layout/root.css -o ./public/styles.css --minify"
-]
+pre_cmd = [ ]
 rerun = false
 rerun_delay = 0
 send_interrupt = false
