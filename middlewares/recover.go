@@ -10,7 +10,10 @@ import (
 
 // Recover is a middleware that recovers from panics
 func Recover(next http.Handler) http.Handler {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level:     slog.LevelError,
+		AddSource: true,
+	}))
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
@@ -23,7 +26,6 @@ func Recover(next http.Handler) http.Handler {
 					"method", r.Method,
 				)
 
-				// Return an internal server error to the client
 				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			}
 		}()

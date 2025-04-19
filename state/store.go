@@ -13,19 +13,19 @@ type Store struct {
 // NewStore creates a new state store
 func NewStore() *Store {
 	return &Store{
-		values: make(map[string]interface{}),
+		values: make(map[string]any),
 	}
 }
 
 // Set sets a value in the store
-func (s *Store) Set(key string, value interface{}) {
+func (s *Store) Set(key string, value any) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.values[key] = value
 }
 
 // Get retrieves a value from the store
-func (s *Store) Get(key string) interface{} {
+func (s *Store) Get(key string) any {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return s.values[key]
