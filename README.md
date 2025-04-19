@@ -1,6 +1,12 @@
 # GOTTH Stack Starter Template
 
 A production-ready, fully-featured starter template for building modern web applications using the GOTH stack:
+- Simple and global state management on the server side (no need for use of Redux or similar libraries)
+- Compiled in to single binary to ship to production (including your static assets)
+- Type-safe HTML templating with Templ
+- Fast and efficient server-side rendering with Go
+
+![GOTH_SS](public/ss.png)
 
 - **GO** - A fast, statically typed programming language
 - **T**empl - Typed HTML templating for Go
