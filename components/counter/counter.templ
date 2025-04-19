@@ -1,32 +1,21 @@
 package counter
 
 import "strconv"
+import "github.com/dtg-lucifer/goth-stack-starter/components/ui/button"
 
 templ Counter(count int) {
     <div id="counter" class="flex flex-col items-center gap-2">
         <p class="mt-4 text-lg">Current count: {strconv.Itoa(count)}</p>
         <div class="flex gap-2">
-            <button 
-                hx-post="/api/counter/increment" 
-                hx-target="#counter" 
-                hx-swap="outerHTML"
-                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                Increment
-            </button>
-            <button 
-                hx-post="/api/counter/decrement" 
-                hx-target="#counter" 
-                hx-swap="outerHTML"
-                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                Decrement
-            </button>
-            <button 
-                hx-post="/api/counter/reset" 
-                hx-target="#counter" 
-                hx-swap="outerHTML"
-                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-                Reset
-            </button>
+            @button.Button(button.Default, button.DefaultSize, "", false, "/api/counter/increment", "#counter", "outerHTML") {
+                <span class="text-lg">Increment</span>
+            }
+            @button.Button(button.Destructive, button.DefaultSize, "", false, "/api/counter/decrement", "#counter", "outerHTML") {
+                <span class="text-lg">Decrement</span>
+            }
+            @button.Button(button.Secondary, button.DefaultSize, "", false, "/api/counter/reset", "#counter", "outerHTML") {
+                <span class="text-lg">Reset</span>
+            }
         </div>
     </div>
 }

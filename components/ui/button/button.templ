@@ -1,0 +1,73 @@
+package button
+
+import (
+	"strings"
+)
+
+// ButtonVariant defines button style variants
+type ButtonVariant string
+
+// ButtonSize defines button size variants
+type ButtonSize string
+
+// Available button variants
+const (
+	Default     ButtonVariant = "default"
+	Destructive ButtonVariant = "destructive"
+	Outline     ButtonVariant = "outline"
+	Secondary   ButtonVariant = "secondary"
+	Ghost       ButtonVariant = "ghost"
+	Link        ButtonVariant = "link"
+)
+
+// Available button sizes
+const (
+	DefaultSize ButtonSize = "default"
+	Small       ButtonSize = "sm"
+	Large       ButtonSize = "lg"
+	Icon        ButtonSize = "icon"
+)
+
+// Class mappings for variants
+var variantClasses = map[ButtonVariant]string{
+	Default:     "bg-primary text-primary-foreground hover:bg-primary/90",
+	Destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+	Outline:     "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+	Secondary:   "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+	Ghost:       "hover:bg-accent hover:text-accent-foreground",
+	Link:        "text-primary underline-offset-4 hover:underline",
+}
+
+// Class mappings for sizes
+var sizeClasses = map[ButtonSize]string{
+	DefaultSize: "h-10 px-4 py-2",
+	Small:       "h-9 rounded-md px-3",
+	Large:       "h-11 rounded-md px-8",
+	Icon:        "h-10 w-10",
+}
+
+// buttonClasses generates the CSS classes for button styling
+func buttonClasses(variant ButtonVariant, size ButtonSize, additionalClasses ...string) string {
+	baseClasses := "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+	
+	variantClass, ok := variantClasses[variant]
+	if !ok {
+		variantClass = variantClasses[Default]
+	}
+	
+	sizeClass, ok := sizeClasses[size]
+	if !ok {
+		sizeClass = sizeClasses[DefaultSize]
+	}
+	
+	classes := []string{baseClasses, variantClass, sizeClass}
+	classes = append(classes, additionalClasses...)
+	
+	return strings.Join(classes, " ")
+}
+
+templ Button(variant ButtonVariant, size ButtonSize, className string, disabled bool, hxPost string, hxTarget string, hxSwap string) {
+	<button class={ buttonClasses(variant, size, className) } disabled?={ disabled } hx-post={ hxPost } hx-target={ hxTarget } hx-swap={ hxSwap }>
+		{ children... }
+	</button>
+}
