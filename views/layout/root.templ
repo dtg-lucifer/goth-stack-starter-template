@@ -12,12 +12,34 @@ templ RootLayout() {
 			<link rel="stylesheet" href="/styles.css"/>
 			<title>GOTH Stack Starter</title>
 			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
-			<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		</head>
 		<body class="light:bg-foreground dark:bg-background dark:text-foreground dark">
+			// @NOTE do not move the script tag below, it must be before the body tag 
+			<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 			@navbar.Navbar()
 			{ children... }
 			@footer.Footer()
 		</body>
+		// @NOTE the ordering below is important, alpine must be loaded before the script
+		<script src="/script.js"></script>
+		<script>
+				document.addEventListener('alpine:init', () => {
+					Alpine.data('theme', () => ({
+						isDark: false,
+						toggleTheme() {
+							this.isDark = !this.isDark;
+							document.documentElement.classList.toggle('dark', this.isDark);
+							localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+						},
+						init() {
+							const savedTheme = localStorage.getItem('theme');
+							if (savedTheme) {
+								this.isDark = savedTheme === 'dark';
+								document.documentElement.classList.toggle('dark', this.isDark);
+							}
+						}
+					}));
+				});
+			</script>
 	</html>
 }

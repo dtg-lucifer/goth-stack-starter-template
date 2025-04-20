@@ -1,7 +1,7 @@
 .PHONY: run build setup download-tailwind dev dev-all tailwind-watch templ-watch templ download-templ serve-static
 
 # @INFO production build and run
-run: templ tailwind
+run: templ tailwind bundle
 	@go build -tags prod -o ./bin/main . && \
 		./bin/main
 
@@ -35,6 +35,11 @@ env:
 	@touch .env && \
 		cat .env.example > .env && \
 		echo "Environment file created."
+
+bundle:
+	@go mod tidy && \
+		npx esbuild ./scripts/*.js --bundle --minify --sourcemap --outfile=./public/script.js
+
 
 download-tailwind:
 	@curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \

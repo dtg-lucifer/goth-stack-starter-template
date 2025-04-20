@@ -32,7 +32,7 @@ func RootLayout() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/styles.css\"><title>GOTH Stack Starter</title><script src=\"https://unpkg.com/htmx.org@2.0.4\"></script><script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script></head><body class=\"light:bg-foreground dark:bg-background dark:text-foreground dark\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/styles.css\"><title>GOTH Stack Starter</title><script src=\"https://unpkg.com/htmx.org@2.0.4\"></script></head><body class=\"light:bg-foreground dark:bg-background dark:text-foreground dark\"><script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -48,7 +48,7 @@ func RootLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</body><script src=\"/script.js\"></script><script>\n\t\t\t\tdocument.addEventListener('alpine:init', () => {\n\t\t\t\t\tAlpine.data('theme', () => ({\n\t\t\t\t\t\tisDark: false,\n\t\t\t\t\t\ttoggleTheme() {\n\t\t\t\t\t\t\tthis.isDark = !this.isDark;\n\t\t\t\t\t\t\tdocument.documentElement.classList.toggle('dark', this.isDark);\n\t\t\t\t\t\t\tlocalStorage.setItem('theme', this.isDark ? 'dark' : 'light');\n\t\t\t\t\t\t},\n\t\t\t\t\t\tinit() {\n\t\t\t\t\t\t\tconst savedTheme = localStorage.getItem('theme');\n\t\t\t\t\t\t\tif (savedTheme) {\n\t\t\t\t\t\t\t\tthis.isDark = savedTheme === 'dark';\n\t\t\t\t\t\t\t\tdocument.documentElement.classList.toggle('dark', this.isDark);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}));\n\t\t\t\t});\n\t\t\t</script></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

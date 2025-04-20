@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../scripts/hello.js"],
+  "sourcesContent": ["console.log(\"Hello, world!\");\n"],
+  "mappings": "MAAA,QAAQ,IAAI,eAAe",
+  "names": []
+}
