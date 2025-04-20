@@ -1,2 +1,2 @@
-(()=>{console.log("Hello, world!");})();
+(()=>{console.log("Hello, world!");document.addEventListener("alpine:init",()=>{Alpine.data("theme",()=>({isDark:!1,toggleTheme(){this.isDark=!this.isDark,document.documentElement.classList.toggle("dark",this.isDark),localStorage.setItem("theme",this.isDark?"dark":"light")},init(){let e=localStorage.getItem("theme");e&&(this.isDark=e==="dark",document.documentElement.classList.toggle("dark",this.isDark))}}))});})();
 //# sourceMappingURL=script.js.map

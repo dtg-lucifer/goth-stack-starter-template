@@ -11,7 +11,7 @@ air:
 
 dev: templ tailwind
 	@echo "Starting development server with all watchers..."
-	@$(MAKE) -j3 air templ-watch tailwind-watch
+	@$(MAKE) -j5 air templ-watch tailwind-watch bundle-watch browser-sync
 # ----------------------------------------------------
 
 # @INFO setup the project
@@ -36,11 +36,23 @@ env:
 		cat .env.example > .env && \
 		echo "Environment file created."
 
+# ----------------------------------------------------
 bundle:
 	@go mod tidy && \
-		npx esbuild ./scripts/*.js --bundle --minify --sourcemap --outfile=./public/script.js
+		find ./scripts -type f -name '*.js' ! -name 'index.js' -exec echo "import './{}';" \; | sed 's|./scripts/||' > ./scripts/index.js && \
+		npx esbuild ./scripts/index.js --bundle --minify --sourcemap --outfile=./public/script.js
+
+bundle-watch:
+	@go mod tidy && \
+		find ./scripts -type f -name '*.js' ! -name 'index.js' -exec echo "import './{}';" \; | sed 's|./scripts/||' > ./scripts/index.js && \
+		npx esbuild ./scripts/index.js --bundle --minify --outfile=./public/script.js --watch=forever
+
+browser-sync:
+	@echo "Starting BrowserSync..."
+	@npx browser-sync start --proxy "localhost:9999" --files "./public/**/*.*" --files "./bin/main" --no-open
 
 
+# ----------------------------------------------------
 download-tailwind:
 	@curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \
 		chmod +x tailwindcss-linux-x64 && \
@@ -72,4 +84,4 @@ tailwind-watch:
 	@./bin/tailwindcss -i ./views/layout/root.css -o ./public/styles.css --watch --minify
 
 templ-watch:
-	@./bin/templ generate --watch --proxy=http://localhost:9999
+	@./bin/templ generate --watch

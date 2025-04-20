@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../scripts/hello.js"],
-  "sourcesContent": ["console.log(\"Hello, world!\");\n"],
-  "mappings": "MAAA,QAAQ,IAAI,eAAe",
-  "names": []
+  "sources": ["../scripts/hello.js", "../scripts/alpine-theme.js"],
+  "sourcesContent": ["console.log(\"Hello, world!\");\n", "document.addEventListener(\"alpine:init\", () => {\n  Alpine.data(\"theme\", () => ({\n    isDark: false,\n    toggleTheme() {\n      this.isDark = !this.isDark;\n      document.documentElement.classList.toggle(\"dark\", this.isDark);\n      localStorage.setItem(\"theme\", this.isDark ? \"dark\" : \"light\");\n    },\n    init() {\n      const savedTheme = localStorage.getItem(\"theme\");\n      if (savedTheme) {\n        this.isDark = savedTheme === \"dark\";\n        document.documentElement.classList.toggle(\"dark\", this.isDark);\n      }\n    },\n  }));\n});\n"],
+  "mappings": "MAAA,QAAQ,IAAI,eAAe,ECA3B,SAAS,iBAAiB,cAAe,IAAM,CAC7C,OAAO,KAAK,QAAS,KAAO,CAC1B,OAAQ,GACR,aAAc,CACZ,KAAK,OAAS,CAAC,KAAK,OACpB,SAAS,gBAAgB,UAAU,OAAO,OAAQ,KAAK,MAAM,EAC7D,aAAa,QAAQ,QAAS,KAAK,OAAS,OAAS,OAAO,CAC9D,EACA,MAAO,CACL,IAAMA,EAAa,aAAa,QAAQ,OAAO,EAC3CA,IACF,KAAK,OAASA,IAAe,OAC7B,SAAS,gBAAgB,UAAU,OAAO,OAAQ,KAAK,MAAM,EAEjE,CACF,EAAE,CACJ,CAAC",
+  "names": ["savedTheme"]
 }

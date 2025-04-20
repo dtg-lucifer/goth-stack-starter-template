@@ -9,6 +9,7 @@ templ RootLayout() {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="icon" href="/favicon.ico"/>
 			<link rel="stylesheet" href="/styles.css"/>
 			<title>GOTH Stack Starter</title>
 			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
@@ -20,26 +21,6 @@ templ RootLayout() {
 			{ children... }
 			@footer.Footer()
 		</body>
-		// @NOTE the ordering below is important, alpine must be loaded before the script
 		<script src="/script.js"></script>
-		<script>
-				document.addEventListener('alpine:init', () => {
-					Alpine.data('theme', () => ({
-						isDark: false,
-						toggleTheme() {
-							this.isDark = !this.isDark;
-							document.documentElement.classList.toggle('dark', this.isDark);
-							localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-						},
-						init() {
-							const savedTheme = localStorage.getItem('theme');
-							if (savedTheme) {
-								this.isDark = savedTheme === 'dark';
-								document.documentElement.classList.toggle('dark', this.isDark);
-							}
-						}
-					}));
-				});
-			</script>
 	</html>
 }

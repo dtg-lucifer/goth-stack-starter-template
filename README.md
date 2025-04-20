@@ -28,6 +28,9 @@ A production-ready, fully-featured starter template for building modern web appl
 - ✅ Chi router with middleware support for flexible routing
 - ✅ Templ for type-safe HTML templating with compile-time checks
 - ✅ HTMX for interactive UI without JavaScript complexity
+- ✅ Alpine.js for lightweight reactivity and client-side interactions
+- ✅ JavaScript bundling with esbuild for organizing client-side code
+- ✅ Browser-sync for automatic browser refreshing during development
 - ✅ Environment variable configuration with .env support
 - ✅ Development mode with hot-reloading
 - ✅ Production mode with embedded assets in a single binary
@@ -43,6 +46,7 @@ A production-ready, fully-featured starter template for building modern web appl
 ├── handlers/        # HTTP request handlers
 ├── middlewares/     # Custom middleware functions
 ├── public/          # Static assets (CSS, JS, images)
+├── scripts/         # JavaScript files to be bundled
 ├── utils/           # Utility functions
 ├── views/           # Templ templates
 │   ├── home/        # Home page templates
@@ -91,7 +95,11 @@ Handlers process HTTP requests and return responses:
 
 The frontend utilizes:
 - HTMX for dynamic content without writing JavaScript
+- Alpine.js for adding lightweight reactivity and client-side behavior
+- JavaScript bundling for organizing client-side code
 - CSS for styling (Tailwind CSS is integrated)
+
+All JavaScript files placed in the `scripts/` directory are automatically bundled, minified, and output to `public/script.js` when building or running the application.
 
 ## 🚀 Getting Started
 
@@ -123,7 +131,8 @@ The frontend utilizes:
    make run
    ```
 
-5. Visit `http://localhost:9999` in your browser (or the port specified in your .env file)
+5. Visit `http://localhost:3000` in your browser for development (browser-sync automatically opens this for you)
+   Visit `http://localhost:9999` for production
 
 ### Development Workflow
 
@@ -131,6 +140,7 @@ The development mode includes:
 - Automatic rebuilding of Go code on save
 - Templ templates hot reloading
 - Tailwind CSS rebuilding on changes
+- Browser-sync for automatic page refreshing
 - Everything runs with a single command: `make dev`
 
 ### Production Deployment
@@ -159,6 +169,19 @@ HTMX is already included in the layout. Create dynamic interfaces without writin
 </button>
 ```
 
+### Using Alpine.js
+
+Alpine.js is included for lightweight reactivity and DOM manipulation:
+
+```html
+<div x-data="{ open: false }">
+  <button @click="open = !open">Toggle</button>
+  <div x-show="open">Content</div>
+</div>
+```
+
+**Important Note**: The order of script tags in the `root.templ` file must not be modified. Alpine.js must be loaded before your content, and the script order is crucial for proper functioning.
+
 ## 📚 Documentation
 
 The GOTH stack provides a simple, powerful approach to web development:
@@ -167,6 +190,8 @@ The GOTH stack provides a simple, powerful approach to web development:
 - **Organized Structure** keeps your codebase maintainable as it grows
 - **Templ** provides type-safe HTML templates that compile to Go code
 - **HTMX** allows for dynamic interfaces with minimal front-end code
+- **Alpine.js** provides lightweight reactivity without complex JavaScript frameworks
+- **JavaScript Bundling** organizes client-side code efficiently
 
 ## 🤝 Contributing
 
