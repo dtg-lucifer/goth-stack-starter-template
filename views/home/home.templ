@@ -1,9 +1,9 @@
 package home
 
 import (
-	"github.com/dtg-lucifer/goth-stack-starter/views/layout"
 	"github.com/dtg-lucifer/goth-stack-starter/components/counter"
 	"github.com/dtg-lucifer/goth-stack-starter/state"
+	"github.com/dtg-lucifer/goth-stack-starter/views/layout"
 )
 
 func getInitialCount() int {
@@ -11,14 +11,13 @@ func getInitialCount() int {
 }
 
 templ Home() {
-	@layout.RootLayout(getInitialCount()) {
+	@layout.RootLayout() {
 		<main class="min-h-screen w-full flex flex-col items-center justify-center">
 			<div class="flex flex-col items-center justify-center h-[30rem] py-2">
-				<img src="/go.png" class="w-32 h-32 mb-4" alt="Go Logo" />
+				<img src="/go.png" class="w-32 h-32 mb-4" alt="Go Logo"/>
 				<h1 class="text-4xl font-bold text-blue-500">Welcome to GOTH Starter Template</h1>
 				<p class="mt-4 text-lg">This is a simple home page template.</p>
 				<p class="mt-4 text-lg">You can start building your application from here.</p>
-				
 				@counter.Counter(getInitialCount())
 			</div>
 		</main>

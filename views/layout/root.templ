@@ -1,22 +1,23 @@
 package layout
 
 import "github.com/dtg-lucifer/goth-stack-starter/components/navbar"
+import "github.com/dtg-lucifer/goth-stack-starter/components/footer"
 
-var count int
-
-templ RootLayout(c int) {
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <title>GOTH Stack Starter</title>
-  </head>
-  <body class="light:bg-white dark:bg-gray-900 dark:text-white dark">
-    @navbar.Navbar()
-    { children... }
-  </body>
-  </html>
+templ RootLayout() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="/styles.css"/>
+			<title>GOTH Stack Starter</title>
+			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+			<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		</head>
+		<body class="light:bg-foreground dark:bg-background dark:text-foreground dark">
+			@navbar.Navbar()
+			{ children... }
+			@footer.Footer()
+		</body>
+	</html>
 }

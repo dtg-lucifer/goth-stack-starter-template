@@ -1,4 +1,4 @@
-# GOTTH Stack Starter Template
+# GOTTH Stack Starter Template (Full fledged production ready template)
 
 A production-ready, fully-featured starter template for building modern web applications using the GOTH stack:
 - Simple and global state management on the server side (no need for use of Redux or similar libraries)
@@ -12,6 +12,7 @@ A production-ready, fully-featured starter template for building modern web appl
 - **T**empl - Typed HTML templating for Go
 - **T**ailwindCSS - A utility-first CSS framework for rapid UI development
 - **H**TMX - HTML-based AJAX for dynamic interfaces without writing JavaScript
+- **Alpine.js** - Special sauce, Specialized for HTMX, a minimal JavaScript framework for adding interactivity to HTML
 
 ## 🚀 Key Benefits
 
